@@ -1,0 +1,26 @@
+{
+  "name": "smart-recharge-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --legacy-watch server.js",
+    "run-dev": "docker-compose up -d",
+    "stop-dev": "docker-compose down"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.49.0",
+    "nodemon": "^3.0.1"
+  }
+}
