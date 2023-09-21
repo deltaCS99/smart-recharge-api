@@ -6,7 +6,7 @@ const sequelize = new Sequelize(`postgres://${process.env.POSTGRES_USER}:${proce
     dialectModule: require("pg"),
     dialectOptions: {
         ssl: useSSL && {
-          require: false 
+          require: true 
         }
     }
   })
