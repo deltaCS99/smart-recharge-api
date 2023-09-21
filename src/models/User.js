@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 const { sq }= require("../configs/db")
 
 const User = sq.define("User", {
-    userID: {
+    id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -14,6 +14,7 @@ const User = sq.define("User", {
     },
     email: {
         type: DataTypes.STRING,
+        primaryKey: true,
         allowNull: false,
     },
     password: {
