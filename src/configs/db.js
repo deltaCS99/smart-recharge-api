@@ -1,7 +1,16 @@
 const Sequelize = require("sequelize")
 
+const useSSL = process.env.USE_SSL === "true"
+console.log(useSSL)
+
 const sequelize = new Sequelize(`postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:5432/${process.env.POSTGRES_DATABASE}`, {
-    dialectModule: require("pg")
+    dialectModule: require("pg"),
+    ssl: useSSL,/* 
+    dialectOptions: {
+        ssl: {
+          require: useSSL
+        }
+    } */
   })
 
 const dbConnection = async () => {
