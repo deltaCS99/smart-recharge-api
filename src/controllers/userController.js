@@ -25,7 +25,6 @@ const loginUser = asyncHandler( async(req, res) => {
             if (isValidPassword) {
                 return res.status(200).json({
                     id: existingUser.id,
-                    username: existingUser.username,
                     email: existingUser.email,
                     token: "token"
                 })
@@ -50,7 +49,6 @@ const getUserProfile = asyncHandler( async(req, res) => {
         if (user) {
             return res.status(200).json({
                 id: user.id,
-                username: user.username,
                 email: user.email
             })
         }
@@ -65,31 +63,28 @@ const getUserProfile = asyncHandler( async(req, res) => {
 
 const registerUser = asyncHandler(async(req, res) => {
 
-    const { username, email, password } = req.body
+    const { name, email, password } = req.body
 
     try {
 
-        if (!username || !email || !password) {
+        if (!email || !password) {
             return res.status(400).json({ error: "Missing field(s)" })
         }
     
         const existingUser = await User.findOne({
             where: {
-                [Op.or]: [
-                    { username },
-                    { password }
-                ]
+                email 
             }
         })
     
         if (existingUser) {
-            return res.status(400).json({ error: "Username or email already exists"})
+            return res.status(400).json({ error: "Email already exists"})
         }
     
         const hashedPassword = await bcrypt.hash(password, 12)
     
         const newUser = await User.create({ 
-            username,
+            name,
             password: hashedPassword,
             email
         })
@@ -98,7 +93,6 @@ const registerUser = asyncHandler(async(req, res) => {
                 message: "User registered successfully",
                 user: {
                   id: newUser.id,
-                  username: newUser.username,
                   email: newUser.email,
                   token: "token"
                 },

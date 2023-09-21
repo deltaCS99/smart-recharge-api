@@ -7,15 +7,19 @@ const User = sq.define("User", {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
-    username: {
+    name: {
         type: DataTypes.STRING,
-        primaryKey: true,
-        allowNull: false,
+        allowNull: true,
     },
     email: {
         type: DataTypes.STRING,
-        primaryKey: true,
+        unique: true,
         allowNull: false,
+    },
+    number: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: true,
     },
     password: {
         type: DataTypes.STRING,
