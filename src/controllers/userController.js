@@ -63,7 +63,7 @@ const getUserProfile = asyncHandler( async(req, res) => {
 
 const registerUser = asyncHandler(async(req, res) => {
 
-    const { name, email, password } = req.body
+    const {email, password } = req.body
 
     try {
 
@@ -84,9 +84,8 @@ const registerUser = asyncHandler(async(req, res) => {
         const hashedPassword = await bcrypt.hash(password, 12)
     
         const newUser = await User.create({ 
-            name,
-            password: hashedPassword,
-            email
+            email,
+            password: hashedPassword
         })
     
         res.status(201).json({
