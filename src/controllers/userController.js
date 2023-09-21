@@ -9,7 +9,6 @@ const loginUser = asyncHandler( async(req, res) => {
     const { email, password } = req.body
     
     try {
-        console.log(req.user)
 
         if (!email || !password) {
             return res.status(400).json({ error: "Missing field(s)" })
@@ -38,45 +37,28 @@ const loginUser = asyncHandler( async(req, res) => {
         return res.status(404).json({ error: "User does not exist"})
     }
     catch(error){
-        console.error(error);
+        console.error(error)
         res.status(500).json({ error: "Internal server error"})
     }
 })
 
 const getUserProfile = asyncHandler( async(req, res) => {
 
-    const { id } = req.query
-    
     try {
+        const user = await User.findByPk(req.user.id)
 
-        if (!email || !password) {
-            return res.status(400).json({ error: "Missing field(s)" })
+        if (user) {
+            return res.status(200).json({
+                id: user.id,
+                username: user.username,
+                email: user.email
+            })
         }
     
-        const existingUser = await User.findOne({
-            where: { email }
-        })
-    
-        if (existingUser) {
-
-            const isValidPassword = await bcrypt.compare(password, existingUser.password)
-
-            if (isValidPassword) {
-                return res.status(200).json({
-                    id: existingUser.id,
-                    username: existingUser.username,
-                    email: existingUser.email,
-                    token: "token"
-                })
-            }
-    
-            return res.status(401).json({ error: "Invalid password" })
-        }
-        
-        return res.status(404).json({ error: "User does not exist"})
+        return res.status(401).json({ error: "User does not exist" })
     }
     catch(error){
-        console.error(error);
+        console.error(error)
         res.status(500).json({ error: "Internal server error"})
     }
 })
@@ -123,7 +105,7 @@ const registerUser = asyncHandler(async(req, res) => {
         })
     }
     catch(error){
-        console.error(error);
+        console.error(error)
         res.status(500).json({ error: "Internal server error"})
     }
 })
