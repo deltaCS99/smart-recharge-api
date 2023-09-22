@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler")
 const { Op } = require("sequelize")
 const bcrypt = require("bcrypt")
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
+const generateToken = require("../utils/generateToken")
 
 const User = require("../models/User")
 
@@ -26,9 +27,8 @@ const loginUser = asyncHandler( async(req, res) => {
             if (isValidPassword) {
                 return res.status(200).json({
                     id: existingUser.id,
-                    stripeId: existingUser.stripeId,
                     email: existingUser.email,
-                    token: "token"
+                    token: generateToken(existingUser.id)
                 })
             }
     
@@ -103,9 +103,8 @@ const registerUser = asyncHandler(async(req, res) => {
                 message: "User registered successfully",
                 user: {
                   id: newUser.id,
-                  stripeId: newUser.stripeId,
                   email: newUser.email,
-                  token: "token"
+                  token: generateToken(newUser.id)
                 },
         })
     }
