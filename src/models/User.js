@@ -7,6 +7,10 @@ const User = sq.define("User", {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
+    stripeId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: true,

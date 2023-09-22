@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler")
 const { Op } = require("sequelize")
 const bcrypt = require("bcrypt")
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 const User = require("../models/User")
 
@@ -25,6 +26,7 @@ const loginUser = asyncHandler( async(req, res) => {
             if (isValidPassword) {
                 return res.status(200).json({
                     id: existingUser.id,
+                    stripeId: existingUser.stripeId,
                     email: existingUser.email,
                     token: "token"
                 })
@@ -80,18 +82,28 @@ const registerUser = asyncHandler(async(req, res) => {
         if (existingUser) {
             return res.status(400).json({ error: "Email already exists"})
         }
-    
+
+        const stripeAcc = await stripe.customers.create({
+            email
+        })
+
+        if (!stripeAcc) {
+            return res.status(400).json({ error: "An error occured while creating stripe acc"})
+        }
+
         const hashedPassword = await bcrypt.hash(password, 12)
-    
-        const newUser = await User.create({ 
+
+        const newUser = await User.create({
+            stripeId: stripeAcc.id, 
             email,
             password: hashedPassword
         })
-    
+        
         res.status(201).json({
                 message: "User registered successfully",
                 user: {
                   id: newUser.id,
+                  stripeId: newUser.stripeId,
                   email: newUser.email,
                   token: "token"
                 },
