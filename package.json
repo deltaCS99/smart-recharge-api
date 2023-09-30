@@ -7,8 +7,8 @@
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --legacy-watch server.js",
-    "run-dev": "docker-compose up --build -d",
-    "stop-dev": "docker-compose down"
+    "run-container": "docker-compose up --build -d",
+    "stop-container": "docker-compose down"
   },
   "keywords": [
     "nodejs",

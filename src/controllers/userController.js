@@ -1,5 +1,4 @@
 const asyncHandler = require("express-async-handler")
-const { Op } = require("sequelize")
 const bcrypt = require("bcrypt")
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 const generateToken = require("../utils/generateToken")
