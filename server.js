@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
     res.status(200).json("Hey this is my API running 🥳")
 })
 
-app.get("/api/users", userRoutes)
+app.use("/api/users", userRoutes)
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`)
