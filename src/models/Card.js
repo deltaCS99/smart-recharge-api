@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize")
-const { sq }= require("../config/db")
+const { sq }= require("../configs/db")
+const User = require("./User")
 
-const SmartCard = sq.define("SmartCard", {
+const Card = sq.define("SmartCard", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -11,7 +12,11 @@ const SmartCard = sq.define("SmartCard", {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    expiryDate: {
+    expiryMonth: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    expiryYear: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -19,18 +24,20 @@ const SmartCard = sq.define("SmartCard", {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    nickName: {
+    cardName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    balance: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: true,
-    },
+    isDefault: {
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    }
 })
 
-SmartCard.belongsTo(User, {
-    foreignKey: "id",
+Card.belongsTo(User, {
+    foreignKey: "userId",
+    as: "user",
 });
 
-module.exports = SmartCard
+module.exports = Card

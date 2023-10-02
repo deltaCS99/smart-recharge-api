@@ -23,7 +23,8 @@ app.get("/", (req, res) => {
     res.status(200).json("Hey this is my API running 🥳")
 })
 
-app.use("/api/users", userRoutes)
+app.use("/api/users", require("./src/routes/userRoutes"))
+app.use("/api/cards", require("./src/routes/cardRoutes"))
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`)

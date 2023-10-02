@@ -31,6 +31,8 @@ const User = sq.define("User", {
     }
 })
 
+User.hasMany(Card, { as: "cards" });
+
 User.sync({ alter: true }).then(() => {
     console.log("User Model synced")
 })
