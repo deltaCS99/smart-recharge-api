@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize")
 const { sq }= require("../configs/db")
-const Card = require("../models/Card")
+const Card = require("./Card")
 
 const User = sq.define("User", {
     id: {
@@ -32,7 +32,13 @@ const User = sq.define("User", {
     }
 })
 
-User.hasMany(Card, { as: "cards" });
+
+User.hasMany(Card, { as: "cards" })
+
+Card.belongsTo(User, {
+    foreignKey: "userId",
+    as: "user",
+})
 
 User.sync({ alter: true }).then(() => {
     console.log("User Model synced")

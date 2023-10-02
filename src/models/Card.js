@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 const { sq }= require("../configs/db")
 const User = require("./User")
 
-const Card = sq.define("SmartCard", {
+const Card = sq.define("Card", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -35,9 +35,7 @@ const Card = sq.define("SmartCard", {
     }
 })
 
-Card.belongsTo(User, {
-    foreignKey: "userId",
-    as: "user",
-});
+
+
 
 module.exports = Card
