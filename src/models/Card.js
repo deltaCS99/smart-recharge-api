@@ -36,9 +36,7 @@ const Card = sq.define("Card", {
     }
 })
 
-Card.belongsTo(User, {
-    foreignKey: "userId",
-    as: "user",
-});
+
+
 
 module.exports = Card
