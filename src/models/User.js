@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize")
-const { sq }= require("../config/db")
+const { sq }= require("../configs/db")
+const Card = require("../models/Card")
 
 const User = sq.define("User", {
     id: {

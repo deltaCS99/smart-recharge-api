@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize")
 const { sq }= require("../config/db")
+const { sq }= require("../configs/db")
+const User = require("./User")
 
 const Card = sq.define("Card", {
     id: {
@@ -33,5 +35,10 @@ const Card = sq.define("Card", {
         allowNull: false,
     }
 })
+
+Card.belongsTo(User, {
+    foreignKey: "userId",
+    as: "user",
+});
 
 module.exports = Card
