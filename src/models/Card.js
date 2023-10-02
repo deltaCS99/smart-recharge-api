@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize")
 const { sq }= require("../configs/db")
-const User = require("./User")
 
 const Card = sq.define("Card", {
     id: {
@@ -34,8 +33,5 @@ const Card = sq.define("Card", {
         allowNull: false,
     }
 })
-
-
-
 
 module.exports = Card
