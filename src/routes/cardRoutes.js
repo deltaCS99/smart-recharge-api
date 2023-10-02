@@ -2,7 +2,6 @@ const express = require("express")
 
 const auth = require("../middlewares/auth")
 const { getCard, getCards, addCard, updateCard, removeCard } = require("../controllers/cardController")
-const auth = require("../middlewares/auth")
 
 
 const router = express.Router()
