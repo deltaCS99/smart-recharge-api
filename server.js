@@ -3,7 +3,6 @@ const express = require("express")
 const morgan = require("morgan")
 
 const { dbConnection } = require("./src/configs/db")
-const userRoutes = require("./src/routes/userRoutes")
 const PORT = process.env.PORT || 3000
 
 const app = express()
@@ -23,7 +22,8 @@ app.get("/", (req, res) => {
     res.status(200).json("Hey this is my API running 🥳")
 })
 
-app.use("/api/users", userRoutes)
+app.use("/api/users", require("./src/routes/userRoutes"))
+app.use("/api/cards", require("./src/routes/cardRoutes"))
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`)
