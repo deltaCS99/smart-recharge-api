@@ -2,7 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
 
-const { dbConnection } = require("./src/configs/db")
+const { dbConnection } = require("./src/config/db")
 const userRoutes = require("./src/routes/userRoutes")
 const PORT = process.env.PORT || 3000
 
