@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize")
 const { sq }= require("../config/db")
-const Card = require("./Card")
+const SmartCard = require("./SmartCard")
 
 const User = sq.define("User", {
     id: {
@@ -33,9 +33,9 @@ const User = sq.define("User", {
 })
 
 
-User.hasMany(Card, { as: "cards" })
+User.hasMany(SmartCard, { as: "smartcards" })
 
-Card.belongsTo(User, {
+SmartCard.belongsTo(User, {
     foreignKey: "userId",
     as: "user",
 })

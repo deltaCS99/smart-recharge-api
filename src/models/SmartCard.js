@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 const { sq }= require("../config/db")
 
 
-const Card = sq.define("Card", {
+const SmartCard = sq.define("SmartCard", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -24,7 +24,7 @@ const Card = sq.define("Card", {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    cardName: {
+    nickName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -35,4 +35,8 @@ const Card = sq.define("Card", {
     }
 })
 
-module.exports = Card
+SmartCard.sync({ alter: true }).then(() => {
+    console.log("Smartcard Model synced")
+})
+
+module.exports = SmartCard
