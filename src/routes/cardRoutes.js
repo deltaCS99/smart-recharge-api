@@ -7,7 +7,7 @@ const { getCard, getCards, addCard, updateCard, removeCard } = require("../contr
 const router = express.Router()
 
 // @desc Retrieve card
-// @route GET /api/cards/:id
+// @route GET /api/cards
 // @access Private
 router.get("/", auth, getCard)
 
