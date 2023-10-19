@@ -7,8 +7,16 @@ const SmartCard = sq.define("SmartCard", {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+    },    
+    UserId: {
+        type: DataTypes.UUID,
+        allowNull: false,
     },
     cardNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    lastFour: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -32,6 +40,9 @@ const SmartCard = sq.define("SmartCard", {
         defaultValue: false,
         type: DataTypes.BOOLEAN,
         allowNull: false,
+    },
+    balance: {
+        type: DataTypes.FLOAT,
     }
 })
 

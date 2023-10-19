@@ -24,12 +24,12 @@ router.post("/", auth, addCard)
 // @desc Delete card
 // @route GET /api/cards
 // @access Private
-router.delete("/:id", auth, removeCard)
+router.delete("/", auth, removeCard)
 
 
 // @desc Update card
 // @route GET /api/cards
 // @access Private
-router.patch("/:id", auth, updateCard)
+router.patch("/", auth, updateCard)
 
 module.exports = router
