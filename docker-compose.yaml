@@ -3,9 +3,6 @@ services:
   app:
    build: .
    restart: always
-   container_name: smart-recharge-api
-   links:
-    - postgres:postgres
    env_file:
     - "./.env"
    command: npm run dev
@@ -15,6 +12,7 @@ services:
     - postgres
    volumes:
     - .:/smart-recharge-api
+    - /smart-recharge-api/node_modules
 
   postgres:
     restart: always

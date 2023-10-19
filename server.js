@@ -2,8 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
 
-const { dbConnection } = require("./src/configs/db")
-const userRoutes = require("./src/routes/userRoutes")
+const { dbConnection } = require("./src/config/db")
 const PORT = process.env.PORT || 3000
 
 const app = express()
@@ -23,7 +22,9 @@ app.get("/", (req, res) => {
     res.status(200).json("Hey this is my API running 🥳")
 })
 
-app.get("/api/users", userRoutes)
+app.use("/api/users", require("./src/routes/userRoutes"))
+app.use("/api/cards", require("./src/routes/cardRoutes"))
+app.use("/api/smartcards", require("./src/routes/smartRoutes"))
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`)
