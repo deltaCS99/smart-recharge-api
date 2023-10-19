@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", require("./src/routes/userRoutes"))
 app.use("/api/cards", require("./src/routes/cardRoutes"))
+app.use("/api/smartcards", require("./src/routes/smartRoutes"))
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`)

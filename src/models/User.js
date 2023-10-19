@@ -33,12 +33,9 @@ const User = sq.define("User", {
 })
 
 
-User.hasMany(SmartCard, { as: "smartcards" })
+User.hasMany(SmartCard)
 
-SmartCard.belongsTo(User, {
-    foreignKey: "userId",
-    as: "user",
-})
+SmartCard.belongsTo(User)
 
 User.sync({ alter: true }).then(() => {
     console.log("User Model synced")
